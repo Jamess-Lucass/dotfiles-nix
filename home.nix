@@ -15,6 +15,7 @@
     gh
     ripgrep
     nodePackages."dotenv-cli"
+    dotnet-sdk_8
   ];
 
   home.file.".bash_profile" = {
@@ -267,6 +268,7 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    DOTNET_CLI_TELEMETRY_OPTOUT = "true";
   };
 
   # This value determines the Home Manager release that your configuration is
