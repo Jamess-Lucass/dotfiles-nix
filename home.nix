@@ -12,6 +12,7 @@
     k9s
     nodejs_20
     corepack_20
+    gh
   ];
 
   home.file.".bash_profile" = {
