@@ -13,6 +13,8 @@
     nodejs_20
     corepack_20
     gh
+    ripgrep
+    nodePackages."dotenv-cli"
   ];
 
   home.file.".bash_profile" = {
@@ -96,7 +98,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = ["git"];
+      plugins = ["git" "ssh-agent"];
       theme = "robbyrussell";
     };
 
@@ -110,8 +112,161 @@
     };
   };
 
+  programs.neovim = {
+    enable = true;
+
+    plugins = [
+      pkgs.vimPlugins.telescope-nvim
+      pkgs.vimPlugins.telescope-fzf-native-nvim
+      (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [ 
+        p.typescript 
+      ]))
+      pkgs.vimPlugins.undotree
+      pkgs.vimPlugins.mason-nvim
+      pkgs.vimPlugins.mason-lspconfig-nvim
+      pkgs.vimPlugins.nvim-lspconfig
+      pkgs.vimPlugins.catppuccin-nvim
+      pkgs.vimPlugins.lualine-nvim
+      pkgs.vimPlugins.nvim-cmp
+      pkgs.vimPlugins.luasnip
+      pkgs.vimPlugins.cmp_luasnip
+      pkgs.vimPlugins.friendly-snippets
+      pkgs.vimPlugins.cmp-nvim-lsp
+      pkgs.vimPlugins.lspkind-nvim
+      pkgs.vimPlugins.neo-tree-nvim
+    ];
+
+    extraLuaConfig = ''
+      vim.g.mapleader = ' '
+      vim.g.maplocalleader = ' '
+
+      vim.opt.tabstop = 2
+      vim.opt.shiftwidth = 2
+      vim.opt.expandtab = true
+
+      vim.opt.number = true
+      vim.opt.mouse = 'a'
+      vim.opt.hlsearch = true
+
+      require("catppuccin").setup({
+        transparent_background = true
+      })
+
+      vim.cmd.colorscheme "catppuccin"
+
+      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+
+      --------------
+      -- Neo Tree --
+      --------------
+
+      vim.keymap.set('n', '<C-n>', ':Neotree filesystem toggle left<CR>', {})
+
+      --------------
+      -- Lua Line --
+      --------------
+
+      require('lualine').setup({
+        options = {
+          theme = "catppuccin",
+        }
+      })
+
+      ---------------
+      -- Telescope --
+      ---------------
+
+      require('telescope').setup {
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          }
+        }
+      }
+
+      require('telescope').load_extension('fzf')
+
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
+
+      ---------
+      -- LSP --
+      ---------
+
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+      require("mason").setup()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "gopls", "tsserver" }
+      })
+
+      local lspconfig = require('lspconfig')
+      lspconfig.gopls.setup({
+        capabilities = capabilities
+      })
+      lspconfig.tsserver.setup({
+        capabilities = capabilities
+      })
+
+      vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+      vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, {})
+
+      ---------
+      -- cmp --
+      ---------
+
+      local cmp = require('cmp')
+      local lspkind = require('lspkind')
+
+      cmp.setup({
+        snippet = {
+          -- REQUIRED - you must specify a snippet engine
+          expand = function(args)
+              require('luasnip').lsp_expand(args.body)
+          end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+        }, {
+          { name = 'buffer' },
+        }),
+        formatting = {
+          format = lspkind.cmp_format({
+            mode = "symbol_text",
+            menu = ({
+              buffer = "[Buffer]",
+              nvim_lsp = "[LSP]",
+              luasnip = "[LuaSnip]",
+              nvim_lua = "[Lua]",
+              latex_symbols = "[Latex]",
+            })
+          }),
+        }
+      })
+
+      require("luasnip.loaders.from_vscode").lazy_load()
+    '';
+  };
+
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
   };
 
   # This value determines the Home Manager release that your configuration is
