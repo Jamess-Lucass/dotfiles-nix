@@ -114,7 +114,7 @@
 
     shellAliases = {
       cat = "bat";
-      ll = "n -Hde";
+      ll = "n -HAde";
     };
 
     syntaxHighlighting = {
