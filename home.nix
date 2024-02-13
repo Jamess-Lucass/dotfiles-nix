@@ -18,6 +18,7 @@
     dotnet-sdk_8
     kubectl
     kubelogin
+    azure-cli
   ];
 
   home.file.".bash_profile" = {
