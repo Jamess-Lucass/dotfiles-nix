@@ -16,6 +16,7 @@
     ripgrep
     nodePackages."dotenv-cli"
     dotnet-sdk_8
+    kubectl
   ];
 
   home.file.".bash_profile" = {
