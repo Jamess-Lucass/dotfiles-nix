@@ -27,6 +27,8 @@
     '';
   };
 
+  home.file.".config/k9s/skins/catppuccin-mocha-transparent.yaml".source = ./config/k9s/catppuccin-mocha-transparent.yaml;
+
   programs.git = {
     enable = true;
     userName  = "Jamess-Lucass";
@@ -284,6 +286,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     DOTNET_CLI_TELEMETRY_OPTOUT = "true";
+    XDG_CONFIG_HOME = "~/.config";
   };
 
   # This value determines the Home Manager release that your configuration is
