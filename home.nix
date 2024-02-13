@@ -69,6 +69,14 @@
 
     extraConfig = ''
       setw -g mouse on
+
+      set -g base-index 1
+      set -g pane-base-index 1
+      set-window-option -g pane-base-index 1
+      set-option -g renumber-windows on
+
+      bind '"' split-window -v -c "#{pane_current_path}"
+      bind % split-window -h -c "#{pane_current_path}"
     '';
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "tmux-256color";
@@ -88,7 +96,7 @@
 
         export NNN_TMPFILE="$HOME/.config/nnn/.lastd"
 
-        nnn -adeHo "$@"
+        nnn "$@"
 
         if [ -f "$NNN_TMPFILE" ]; then
           . "$NNN_TMPFILE"
@@ -105,7 +113,7 @@
 
     shellAliases = {
       cat = "bat";
-      ll = "n";
+      ll = "n -Hde";
     };
 
     syntaxHighlighting = {
@@ -135,6 +143,7 @@
       pkgs.vimPlugins.cmp-nvim-lsp
       pkgs.vimPlugins.lspkind-nvim
       pkgs.vimPlugins.neo-tree-nvim
+      pkgs.vimPlugins.vim-tmux-navigator
     ];
 
     extraLuaConfig = ''
@@ -202,7 +211,7 @@
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "gopls", "tsserver" }
+        ensure_installed = { "gopls", "tsserver", "csharp_ls" }
       })
 
       local lspconfig = require('lspconfig')
@@ -210,6 +219,9 @@
         capabilities = capabilities
       })
       lspconfig.tsserver.setup({
+        capabilities = capabilities
+      })
+      lspconfig.csharp_ls.setup({
         capabilities = capabilities
       })
 
