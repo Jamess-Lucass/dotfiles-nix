@@ -17,6 +17,7 @@
     nodePackages."dotenv-cli"
     dotnet-sdk_8
     kubectl
+    kubelogin
   ];
 
   home.file.".bash_profile" = {
