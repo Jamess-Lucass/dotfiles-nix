@@ -128,6 +128,8 @@
 
   programs.neovim = {
     enable = true;
+    viAlias = true;
+    vimAlias = true;
 
     plugins = [
       pkgs.vimPlugins.telescope-nvim
@@ -286,7 +288,7 @@
   home.sessionVariables = {
     EDITOR = "nvim";
     DOTNET_CLI_TELEMETRY_OPTOUT = "true";
-    XDG_CONFIG_HOME = "~/.config";
+    XDG_CONFIG_HOME = "$HOME/.config";
   };
 
   # This value determines the Home Manager release that your configuration is
