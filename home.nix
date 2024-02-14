@@ -151,6 +151,7 @@
       pkgs.vimPlugins.lspkind-nvim
       pkgs.vimPlugins.neo-tree-nvim
       pkgs.vimPlugins.vim-tmux-navigator
+      pkgs.vimPlugins.auto-save-nvim
     ];
 
     extraLuaConfig = ''
