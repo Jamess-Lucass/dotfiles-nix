@@ -290,6 +290,7 @@
     EDITOR = "nvim";
     DOTNET_CLI_TELEMETRY_OPTOUT = "true";
     XDG_CONFIG_HOME = "$HOME/.config";
+    PATH = "$PATH:$HOME/go/bin";
   };
 
   # This value determines the Home Manager release that your configuration is
