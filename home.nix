@@ -19,6 +19,7 @@
     kubectl
     kubelogin
     azure-cli
+    act
   ];
 
   home.file.".bash_profile" = {
@@ -119,6 +120,7 @@
     shellAliases = {
       cat = "bat";
       ll = "n -HAde";
+      k = "kubectl";
     };
 
     syntaxHighlighting = {
