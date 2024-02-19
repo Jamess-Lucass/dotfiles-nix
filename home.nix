@@ -20,6 +20,7 @@
     kubelogin
     azure-cli
     act
+    kustomize
   ];
 
   home.file.".bash_profile" = {
