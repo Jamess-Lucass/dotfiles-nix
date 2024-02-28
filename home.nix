@@ -22,6 +22,8 @@
     act
     kustomize
     minikube
+    unzip
+    elixir_1_16
   ];
 
   home.file.".bash_profile" = {
@@ -223,7 +225,7 @@
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "gopls", "tsserver", "csharp_ls" }
+        ensure_installed = { "gopls", "tsserver", "csharp_ls", "elixirls" }
       })
 
       local lspconfig = require('lspconfig')
@@ -234,6 +236,9 @@
         capabilities = capabilities
       })
       lspconfig.csharp_ls.setup({
+        capabilities = capabilities
+      })
+      lspconfig.elixirls.setup({
         capabilities = capabilities
       })
 
