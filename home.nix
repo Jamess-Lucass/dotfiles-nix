@@ -8,7 +8,7 @@
     gnumake
     jq
     nnn
-    go
+    go_1_22
     k9s
     nodejs_20
     corepack_20
@@ -21,6 +21,7 @@
     azure-cli
     act
     kustomize
+    minikube
   ];
 
   home.file.".bash_profile" = {
