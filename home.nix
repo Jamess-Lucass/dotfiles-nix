@@ -140,9 +140,7 @@
     plugins = [
       pkgs.vimPlugins.telescope-nvim
       pkgs.vimPlugins.telescope-fzf-native-nvim
-      (pkgs.vimPlugins.nvim-treesitter.withPlugins (p: [ 
-        p.typescript 
-      ]))
+      pkgs.vimPlugins.nvim-treesitter.withAllGrammars
       pkgs.vimPlugins.undotree
       pkgs.vimPlugins.mason-nvim
       pkgs.vimPlugins.mason-lspconfig-nvim
