@@ -24,6 +24,9 @@
     minikube
     unzip
     elixir_1_16
+    k6
+    temporal-cli
+    dapr-cli
   ];
 
   home.file.".bash_profile" = {
@@ -47,6 +50,7 @@
       merge.conflictstyle = "diff3";
       push.autoSetupRemote = true;
       rebase.autoStash = true;
+      pull.rebase = true;
     };
   };
 
@@ -297,7 +301,7 @@
     EDITOR = "nvim";
     DOTNET_CLI_TELEMETRY_OPTOUT = "true";
     XDG_CONFIG_HOME = "$HOME/.config";
-    PATH = "$PATH:$HOME/go/bin";
+    PATH = "$PATH:$HOME/go/bin:$HOME/.dotnet/tools";
   };
 
   # This value determines the Home Manager release that your configuration is
