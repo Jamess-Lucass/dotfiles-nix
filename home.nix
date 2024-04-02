@@ -7,6 +7,7 @@
   home.packages = with pkgs; [
     gnumake
     jq
+    gcc
     nnn
     go_1_22
     k9s
@@ -27,6 +28,7 @@
     k6
     temporal-cli
     dapr-cli
+    kubeseal
   ];
 
   home.file.".bash_profile" = {
