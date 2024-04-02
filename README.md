@@ -1,5 +1,8 @@
 # dotfiles-nix
 
+> [!NOTE]  
+> These dotfiles are for my personal use, due to some elements being hardcoded, I advise you to not install from this repository directly.
+
 ## Install
 
 ```bash
