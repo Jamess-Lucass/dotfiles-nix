@@ -6,6 +6,7 @@
 
   home.packages = with pkgs; [
     gnumake
+    gcc
     jq
     gcc
     nnn
@@ -29,6 +30,8 @@
     temporal-cli
     dapr-cli
     kubeseal
+    snyk
+    bun
   ];
 
   home.file.".bash_profile" = {
@@ -303,6 +306,7 @@
     EDITOR = "nvim";
     DOTNET_CLI_TELEMETRY_OPTOUT = "true";
     XDG_CONFIG_HOME = "$HOME/.config";
+    DOTNET_ROOT = "${pkgs.dotnet-sdk_8}";
     PATH = "$PATH:$HOME/go/bin:$HOME/.dotnet/tools";
   };
 
