@@ -33,6 +33,7 @@
     snyk
     bun
     python311Packages."pip"
+    postgresql_16
   ];
 
   home.file.".bash_profile" = {
