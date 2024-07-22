@@ -10,15 +10,25 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
+  outputs = { nixpkgs, home-manager, ... }: {
       homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+        pkgs = nixpkgs.legacyPackages.x64_64-linux;
 
         modules = [ ./home.nix ];
+
+        extraSpecialArgs = {
+          system = "x86_64-linux";
+        };
+      };
+
+      homeConfigurations.mac = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+
+        modules = [ ./home.nix ];
+
+        extraSpecialArgs = {
+          system = "aarch64-darwin";
+        };
       };
     };
 }

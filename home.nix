@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, system, ... }: let
+  isDarwin = system == "aarch64-darwin" || system == "x86_64-darwin";
+in {
   home.username = "james";
-  home.homeDirectory = "/home/james";
+  home.homeDirectory = if isDarwin then "/Users/james" else "/home/james";
 
   home.packages = with pkgs; [
     gnumake
