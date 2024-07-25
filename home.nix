@@ -34,6 +34,7 @@ in {
     bun
     python311Packages."pip"
     postgresql_16
+    ollama
   ];
 
   home.file.".bash_profile" = {
