@@ -15,12 +15,22 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, disko, ... }:
     let
       supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
+      nixosConfigurations = {
+        "homelab@minipc01" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [ 
+            disko.nixosModules.disko 
+            ./hosts/mini-pc-01
+          ];
+        };
+      };
+
       homeConfigurations = {
         "james@wsl" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux;

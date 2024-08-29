@@ -22,7 +22,7 @@
    > Choose the flake from within the `flake.nix` `homeConfigurations` array.
 
    ```bash
-   home-manager switch --flake .#<confguration> --extra-experimental-features "nix-command flakes"
+   home-manager switch --flake .#<CONFIG> --extra-experimental-features "nix-command flakes"
    ```
 
 ## Updating
@@ -40,5 +40,20 @@
    > Run the correct home-manager flake, exactly as ran in the Setup dotfiles section.
 
    ```bash
-   home-manager switch --flake .#<confguration> --extra-experimental-features "nix-command flakes"
+   home-manager switch --flake .#<CONFIG> --extra-experimental-features "nix-command flakes"
    ```
+
+# Homelab
+
+## NixOS
+
+### Initial
+
+1. Plug in my ventoy USB
+2. Select the NixOS bootable ISO
+3. grab the IP address
+4. Go back to host machine and run `nix run github:nix-community/nixos-anywhere -- --flake '.#<CONFIG>' <name>@<ip>`
+
+### Rebuild
+
+`nixos-rebuild switch --flake '.#<CONFIG>' --target-host "<name>@<ip>" --use-remote-sudo`
