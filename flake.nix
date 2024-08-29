@@ -1,33 +1,37 @@
 {
-  description = "Home Manager configuration of WSL";
+  description = "NixOS and Home manager configuration";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
-      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-        modules = [ ./home.nix ];
-
-        extraSpecialArgs = {
-          system = "x86_64-linux";
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
+      supportedSystems = [ "x86_64-linux" "aarch64-darwin" ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+    in
+    {
+      homeConfigurations = {
+        "james@wsl" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          modules = [ ./home-manager/james/wsl.nix ];
+          extraSpecialArgs = { inherit self; };
         };
-      };
 
-      homeConfigurations.mac = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-
-        modules = [ ./home.nix ];
-
-        extraSpecialArgs = {
-          system = "aarch64-darwin";
+        "james@mac" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          modules = [ ./home-manager/james/mac.nix ];
+          extraSpecialArgs = { inherit self; };
         };
       };
     };

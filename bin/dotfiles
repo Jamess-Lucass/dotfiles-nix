@@ -28,6 +28,3 @@ else
 fi
 
 cd "$DOTFILES_DIR"
-
-# Run nix switch
-home-manager switch --flake .#wsl --extra-experimental-features nix-command --extra-experimental-features flakes

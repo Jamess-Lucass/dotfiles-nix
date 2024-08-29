@@ -1,14 +1,37 @@
-{ config, pkgs, system, ... }: let
-  isDarwin = system == "aarch64-darwin" || system == "x86_64-darwin";
-in {
-  home.username = "james";
-  home.homeDirectory = if isDarwin then "/Users/james" else "/home/james";
+{ config, pkgs, system, ... }:
+
+{
+  home = {
+    username = "james";
+
+    file.".config/k9s/skins/catppuccin-mocha-transparent.yaml".source = ../config/k9s/catppuccin-mocha-transparent.yaml;
+    file.".bash_profile" = {
+      text = ''
+        [[ $TERM != "tmux-256color" ]] && exec tmux;
+      '';
+    };
+
+    # This value determines the Home Manager release that your configuration is
+    # compatible with. This helps avoid breakage when a new Home Manager release
+    # introduces backwards incompatible changes.
+    #
+    # You should not change this value, even if you update Home Manager. If you do
+    # want to update the value, then make sure to first check the Home Manager
+    # release notes.
+    stateVersion = "23.11";
+  };
+
+  nix = {  
+   package = pkgs.nix;  
+   settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+  };
 
   home.packages = with pkgs; [
     gnumake
     gcc
     jq
-    gcc
     nnn
     go_1_22
     k9s
@@ -37,13 +60,13 @@ in {
     nixos-rebuild
   ];
 
-  home.file.".bash_profile" = {
-    text = ''
-      [[ $TERM != "tmux-256color" ]] && exec tmux;
-    '';
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    DOTNET_CLI_TELEMETRY_OPTOUT = "true";
+    XDG_CONFIG_HOME = "$HOME/.config";
+    DOTNET_ROOT = "${pkgs.dotnet-sdk_8}";
+    PATH = "$PATH:$HOME/go/bin:$HOME/.dotnet/tools";
   };
-
-  home.file.".config/k9s/skins/catppuccin-mocha-transparent.yaml".source = ./config/k9s/catppuccin-mocha-transparent.yaml;
 
   programs.git = {
     enable = true;
@@ -304,23 +327,6 @@ in {
       require("luasnip.loaders.from_vscode").lazy_load()
     '';
   };
-
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    DOTNET_CLI_TELEMETRY_OPTOUT = "true";
-    XDG_CONFIG_HOME = "$HOME/.config";
-    DOTNET_ROOT = "${pkgs.dotnet-sdk_8}";
-    PATH = "$PATH:$HOME/go/bin:$HOME/.dotnet/tools";
-  };
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
