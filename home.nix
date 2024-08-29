@@ -34,7 +34,7 @@ in {
     bun
     python311Packages."pip"
     postgresql_16
-    ollama
+    nixos-rebuild
   ];
 
   home.file.".bash_profile" = {
