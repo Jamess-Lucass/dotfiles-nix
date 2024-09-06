@@ -22,11 +22,11 @@
     in
     {
       nixosConfigurations = {
-        "homelab@minipc01" = nixpkgs.lib.nixosSystem {
+        "homelab@k3s-cluster" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [ 
             disko.nixosModules.disko 
-            ./hosts/mini-pc-01
+            ./hosts/k3s-cluster
           ];
         };
       };

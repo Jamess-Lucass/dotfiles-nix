@@ -26,7 +26,7 @@
 
   services.openssh = {
     enable = true;
-    # settings.PasswordAuthentication = false;
+    settings.PasswordAuthentication = false;
   };
 
   security.sudo.wheelNeedsPassword = false;
@@ -34,7 +34,10 @@
   users.users.james = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    password = "test"; # Remove this at a later date
+    
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICu21cvLmuaWIukVd2Z2m0jxTNFuEW5kc4HaK7HWirHX james@James"
+    ];
   };
 
   system.stateVersion = "23.11";

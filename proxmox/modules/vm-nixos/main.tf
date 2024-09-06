@@ -24,8 +24,6 @@ resource "proxmox_vm_qemu" "vm-nixos" {
   onboot                 = true
   vm_state               = "running"
 
-  sshkeys = var.public_ssh_key
-
   network {
     bridge = "vmbr0"
     model  = "virtio"

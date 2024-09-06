@@ -39,9 +39,3 @@ variable "disk_size" {
   description = "Size of the VM Disk"
   type        = string
 }
-
-variable "public_ssh_key" {
-  description = "Public SSH key"
-  type        = string
-  sensitive = true
-}
