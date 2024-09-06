@@ -1,4 +1,4 @@
-{ config, pkgs, system, ... }:
+{ config, pkgs, system, lib, ... }:
 
 {
   home = {
@@ -27,6 +27,10 @@
       experimental-features = [ "nix-command" "flakes" ];
     };
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "terraform"
+  ];
 
   home.packages = with pkgs; [
     gnumake
@@ -58,6 +62,7 @@
     python311Packages."pip"
     postgresql_16
     nixos-rebuild
+    terraform
   ];
 
   home.sessionVariables = {
@@ -258,7 +263,7 @@
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "gopls", "tsserver", "csharp_ls", "elixirls" }
+        ensure_installed = { "gopls", "tsserver", "csharp_ls", "elixirls", "terraformls" }
       })
 
       local lspconfig = require('lspconfig')
@@ -272,6 +277,9 @@
         capabilities = capabilities
       })
       lspconfig.elixirls.setup({
+        capabilities = capabilities
+      })
+      lspconfig.terraformls.setup({
         capabilities = capabilities
       })
 

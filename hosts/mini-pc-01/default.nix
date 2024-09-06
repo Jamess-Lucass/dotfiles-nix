@@ -3,6 +3,7 @@
 {
   imports = [
       (modulesPath + "/installer/scan/not-detected.nix")
+      (modulesPath + "/profiles/qemu-guest.nix")
       ./disk-config.nix
   ];
 
@@ -13,10 +14,9 @@
     efiInstallAsRemovable = true;
   };
 
-  networking = {
-    hostName = "minipc01";
-    networkmanager.enable = true;
-  };
+  # networking = {
+  #   hostName = "minipc01";
+  # };
 
   time.timeZone = "Europe/London";
 
@@ -33,7 +33,7 @@
 
   users.users.james = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" ];
     password = "test"; # Remove this at a later date
   };
 

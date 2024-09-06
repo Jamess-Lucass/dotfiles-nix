@@ -1,10 +1,11 @@
 # https://github.com/nix-community/disko/blob/master/example/btrfs-subvolumes.nix
+{ lib, ... }:
 {
   disko.devices = {
     disk = {
       main = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = lib.mkDefault "/dev/sda";
         content = {
           type = "gpt";
           partitions = {
