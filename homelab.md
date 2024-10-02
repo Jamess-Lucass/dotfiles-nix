@@ -24,15 +24,25 @@ The majority of my workloads are deployed to proxmox, I currently have a 2 node 
     dotenv -- terraform -chdir=./proxmox apply
     ```
 
-4. Run the NixOS automation against the VMs
+4. Grab the IP address of the VM and set a temporary password
+
+    > This will be needed in the following step when we wish to run nixos anywhere.
+
+    ```bash
+    ip addr
+    ```
+
+    ```bash
+    passwd
+    ```
+
+5. Run the NixOS automation against the VMs
 
     > I use [NixOS anywhere](https://github.com/nix-community/nixos-anywhere) to remotely install and configure NixOS.
 
     ```bash
     nix run github:nix-community/nixos-anywhere -- --flake '.#homelab@k3s-cluster' nixos@<IP-ADDRESS>
     ```
-
-    > To obtain the `<IP-ADDRESS>`, ssh into the machine and run `ip addr`
 
 <!-- ### Rebuild
 
