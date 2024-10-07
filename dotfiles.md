@@ -42,3 +42,11 @@
    ```bash
    home-manager switch --flake '<path>#<configuration>'
    ```
+
+## Extra
+
+> [!NOTE]  
+> You may need to sym link dotnet for VSCode to work.
+> ```bash
+> sudo ln -s /home/james/.nix-profile/bin/dotnet /usr/local/bin/dotnet
+> ```
