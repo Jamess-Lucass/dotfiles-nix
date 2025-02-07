@@ -6,4 +6,8 @@
   ];
 
   home.homeDirectory = "/Users/james";
+
+  home.packages = with pkgs; [
+    nodePackages."eas-cli"
+  ];
 }
