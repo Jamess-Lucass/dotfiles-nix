@@ -37,14 +37,14 @@
     gcc
     jq
     nnn
-    go_1_22
+    go_1_24
     k9s
     nodejs_20
     corepack_20
     gh
     ripgrep
     nodePackages."dotenv-cli"
-    dotnet-sdk_8
+    dotnet-sdk_9
     kubectl
     kubelogin
     azure-cli
@@ -52,7 +52,7 @@
     kustomize
     minikube
     unzip
-    elixir_1_16
+    elixir_1_18
     k6
     temporal-cli
     dapr-cli
@@ -60,16 +60,18 @@
     snyk
     bun
     python311Packages."pip"
+    python311Packages."coverage"
     postgresql_16
     nixos-rebuild
     terraform
+    sqlcmd
   ];
 
   home.sessionVariables = {
     EDITOR = "nvim";
     DOTNET_CLI_TELEMETRY_OPTOUT = "true";
     XDG_CONFIG_HOME = "$HOME/.config";
-    DOTNET_ROOT = "${pkgs.dotnet-sdk_8}";
+    DOTNET_ROOT = "${pkgs.dotnet-sdk_9}/share/dotnet";
     PATH = "$PATH:$HOME/go/bin:$HOME/.dotnet/tools";
   };
 
