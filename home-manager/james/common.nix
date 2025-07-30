@@ -65,6 +65,8 @@
     nixos-rebuild
     terraform
     sqlcmd
+    poetry
+    stdenv.cc.cc.lib
   ];
 
   home.sessionVariables = {
@@ -73,6 +75,7 @@
     XDG_CONFIG_HOME = "$HOME/.config";
     DOTNET_ROOT = "${pkgs.dotnet-sdk_9}/share/dotnet";
     PATH = "$PATH:$HOME/go/bin:$HOME/.dotnet/tools";
+    LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
   };
 
   programs.git = {
