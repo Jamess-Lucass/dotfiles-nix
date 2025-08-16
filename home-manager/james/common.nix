@@ -59,13 +59,10 @@
     kubeseal
     snyk
     bun
-    python311Packages."pip"
-    python311Packages."coverage"
     postgresql_16
     nixos-rebuild
     terraform
     sqlcmd
-    poetry
     stdenv.cc.cc.lib
   ];
 
