@@ -39,11 +39,9 @@
     nnn
     go_1_24
     k9s
-    nodejs_20
-    corepack_20
+    fnm
     gh
     ripgrep
-    nodePackages."dotenv-cli"
     dotnet-sdk_9
     kubectl
     kubelogin
@@ -55,7 +53,6 @@
     elixir_1_18
     k6
     temporal-cli
-    dapr-cli
     kubeseal
     snyk
     bun
@@ -139,7 +136,7 @@
     autosuggestion.enable = true;
     enableCompletion = true;
 
-    initExtra = ''
+    initContent = ''
       n () {
         if [ -n $NNNLVL ] && [ "$NNNLVL" -ge 1 ]; then
           echo "nnn is already running"
@@ -155,6 +152,8 @@
           rm -f "$NNN_TMPFILE" > /dev/null
         fi
       }
+
+      eval "$(fnm env --use-on-cd --shell zsh)"
     '';
 
     oh-my-zsh = {
