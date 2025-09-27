@@ -7,7 +7,7 @@
     file.".config/k9s/skins/catppuccin-mocha-transparent.yaml".source = ../config/k9s/catppuccin-mocha-transparent.yaml;
     file.".bash_profile" = {
       text = ''
-        [[ $TERM != "tmux-256color" ]] && exec tmux;
+        [[ $TERM != "tmux-256color" && $TERM_PROGRAM != "WarpTerminal" ]] && exec tmux;
       '';
     };
 
@@ -61,6 +61,7 @@
     terraform
     sqlcmd
     stdenv.cc.cc.lib
+    cloudflared
   ];
 
   home.sessionVariables = {
@@ -264,14 +265,14 @@
 
       require("mason").setup()
       require("mason-lspconfig").setup({
-        ensure_installed = { "gopls", "tsserver", "csharp_ls", "elixirls", "terraformls" }
+        ensure_installed = { "gopls", "ts_ls", "csharp_ls", "elixirls", "terraformls" }
       })
 
       local lspconfig = require('lspconfig')
       lspconfig.gopls.setup({
         capabilities = capabilities
       })
-      lspconfig.tsserver.setup({
+      lspconfig.ts_ls.setup({
         capabilities = capabilities
       })
       lspconfig.csharp_ls.setup({
