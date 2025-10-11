@@ -63,6 +63,7 @@
     sqlcmd
     stdenv.cc.cc.lib
     cloudflared
+    ffmpeg
   ];
 
   home.sessionVariables = {
