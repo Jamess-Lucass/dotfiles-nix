@@ -34,6 +34,7 @@
 
   home.packages = with pkgs; [
     gnumake
+    dnsutils
     gcc
     jq
     nnn
@@ -68,6 +69,7 @@
     EDITOR = "nvim";
     DOTNET_CLI_TELEMETRY_OPTOUT = "true";
     XDG_CONFIG_HOME = "$HOME/.config";
+    XDG_RUNTIME_DIR = "$HOME/.local/share/runtime";
     DOTNET_ROOT = "${pkgs.dotnet-sdk_9}/share/dotnet";
     PATH = "$PATH:$HOME/go/bin:$HOME/.dotnet/tools";
     LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
@@ -153,6 +155,9 @@
           rm -f "$NNN_TMPFILE" > /dev/null
         fi
       }
+
+      # Ensure fnm multishells directory exists (WSL workaround)
+      mkdir -p "$XDG_RUNTIME_DIR/fnm_multishells"
 
       eval "$(fnm env --use-on-cd --shell zsh)"
     '';
