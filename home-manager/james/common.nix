@@ -78,18 +78,23 @@
 
   programs.git = {
     enable = true;
-    userName  = "Jamess-Lucass";
-    userEmail = "23193271+Jamess-Lucass@users.noreply.github.com";
-    
-    extraConfig = {
-      color.ui = true;
-      diff.colorMoved = "zebra";
-      fetch.prune = true;
-      init.defaultBranch = "main";
-      merge.conflictstyle = "diff3";
-      push.autoSetupRemote = true;
-      rebase.autoStash = true;
-      pull.rebase = true;
+
+    settings = {
+      user = {
+        name  = "Jamess-Lucass";
+        email = "23193271+Jamess-Lucass@users.noreply.github.com";
+      };
+
+      extraConfig = {
+        color.ui = true;
+        diff.colorMoved = "zebra";
+        fetch.prune = true;
+        init.defaultBranch = "main";
+        merge.conflictstyle = "diff3";
+        push.autoSetupRemote = true;
+        rebase.autoStash = true;
+        pull.rebase = true;
+      };
     };
   };
 
