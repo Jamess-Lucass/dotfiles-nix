@@ -279,20 +279,19 @@
         ensure_installed = { "gopls", "ts_ls", "csharp_ls", "elixirls", "terraformls" }
       })
 
-      local lspconfig = require('lspconfig')
-      lspconfig.gopls.setup({
+      vim.lsp.config('gopls', {
         capabilities = capabilities
       })
-      lspconfig.ts_ls.setup({
+      vim.lsp.config('ts_ls', {
         capabilities = capabilities
       })
-      lspconfig.csharp_ls.setup({
+      vim.lsp.config('csharp_ls', {
         capabilities = capabilities
       })
-      lspconfig.elixirls.setup({
+      vim.lsp.config('elixirls', {
         capabilities = capabilities
       })
-      lspconfig.terraformls.setup({
+      vim.lsp.config('terraformls', {
         capabilities = capabilities
       })
 
