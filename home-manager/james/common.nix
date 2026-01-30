@@ -38,12 +38,12 @@
     gcc
     jq
     nnn
-    go_1_24
+    go_1_25
     k9s
     fnm
     gh
     ripgrep
-    dotnet-sdk_9
+    dotnet-sdk_10
     kubectl
     kubelogin
     azure-cli
@@ -57,7 +57,7 @@
     kubeseal
     snyk
     bun
-    postgresql_16
+    postgresql_18
     nixos-rebuild
     terraform
     sqlcmd
