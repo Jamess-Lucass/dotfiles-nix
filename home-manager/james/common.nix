@@ -72,7 +72,7 @@
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_RUNTIME_DIR = "$HOME/.local/share/runtime";
     DOTNET_ROOT = "${pkgs.dotnet-sdk_9}/share/dotnet";
-    PATH = "$PATH:$HOME/go/bin:$HOME/.dotnet/tools";
+    PATH = "$PATH:$HOME/go/bin:$HOME/.dotnet/tools:$HOME/.local/bin";
     LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
   };
 
