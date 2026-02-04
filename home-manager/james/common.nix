@@ -64,7 +64,6 @@
     stdenv.cc.cc.lib
     cloudflared
     ffmpeg
-    tailscale
   ];
 
   home.sessionVariables = {
